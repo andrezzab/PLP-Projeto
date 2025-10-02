@@ -5,7 +5,7 @@ Andrezza Bonfim - amb8@cin.upfe.br
 
 Athos Pugliese - amps3@cin.ufpe.br
 
-Jordan Kalliure Souza Carvalho - jksc@cin.upfe.br
+Jordan Carvalho - jksc@cin.upfe.br
 
 ## Proposta/Objetivo do Projeto
 Este projeto tem como objetivo desenvolver uma DSL que permitirá ao usuário carregar, analisar, filtrar e visualizar as características fundamentais de um conjunto de dados de forma rápida e intuitiva.
