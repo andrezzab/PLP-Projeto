@@ -1,7 +1,7 @@
 # PLP-Projeto
 
 ## Equipe
-Athos
+Athos Pugliese - amps3@cin.ufpe.br
 
 Andrezza Bonfim - amb8@cin.upfe.br
 
