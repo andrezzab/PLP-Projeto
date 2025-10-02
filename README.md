@@ -34,9 +34,3 @@ Determinar os quartis (Q1, Q2, Q3) de uma coluna.
 Contagem: Obter o número total de registros (linhas) em uma tabela.
 
 Filtragem: Criar novos subconjuntos de dados baseados em condições lógicas (ex: idade > 30, curso == "Computação").
-
-### Visualização Baseada em Texto
-
-Tabela de Frequência: Contar e exibir a ocorrência de cada valor em colunas categóricas.
-
-Histograma: Gerar um histograma simples, baseado em caracteres de texto, para visualizar a distribuição de dados numéricos.
