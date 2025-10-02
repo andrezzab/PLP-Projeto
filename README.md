@@ -2,7 +2,9 @@
 
 ## Equipe
 Athos
+
 Andrezza Bonfim - amb8@cin.upfe.br
+
 Jordan Kalliure Souza Carvalho - jksc@cin.upfe.br
 
 ## Proposta/Objetivo do Projeto
