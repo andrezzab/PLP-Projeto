@@ -36,9 +36,7 @@ Contagem: Obter o número total de registros (linhas) em uma tabela.
 Filtragem: Criar novos subconjuntos de dados baseados em condições lógicas (ex: idade > 30, curso == "Computação").
 
 
-—--------------------------------------------------------------------------------------------------------------
 A ideia é permitir que o usuário escreva, por exemplo:
-—--------------------------------------------------------------------------------------------------------------
 LOAD "funcionarios.csv" AS func;
 LOAD "vendas.csv" AS vendas;
 
