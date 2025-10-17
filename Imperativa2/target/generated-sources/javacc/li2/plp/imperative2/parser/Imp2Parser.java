@@ -311,7 +311,7 @@ public class Imp2Parser implements Imp2ParserConstants {
     }
   }
 
-  static final public Estatisticas PStats() throws ParseException {
+  static final public CalculadoraEstatisticas PStats() throws ParseException {
     trace_call("PStats");
     try {
     Token idVar, idCol;
@@ -325,7 +325,7 @@ public class Imp2Parser implements Imp2ParserConstants {
         // Remove as aspas do literal de string
         String nomeColuna = idCol.toString().replace("\u005c"", "");
         col = new ValorString(nomeColuna);
-        {if (true) return new Estatisticas(var, col);}
+        {if (true) return new CalculadoraEstatisticas(var, col);}
     throw new Error("Missing return statement in function");
     } finally {
       trace_return("PStats");

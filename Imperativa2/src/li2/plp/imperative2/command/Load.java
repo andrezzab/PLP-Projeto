@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import li2.plp.expressions2.expression.Id;
-import li2.plp.expressions2.expression.Valor;
 import li2.plp.expressions2.expression.ValorString;
 import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;

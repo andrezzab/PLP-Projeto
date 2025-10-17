@@ -43,6 +43,17 @@ public interface Tipo {
 	 * @return <code>true</code> se forem o mesmo tipo;
 	 *         <code>false</code> caso contrario.
 	 */
+
+	public abstract boolean eDouble();
+
+	/**
+	 * Compara este tipo com o tipo dado.
+	 * Dois tipos s�o iguais se eles t�m o mesmo nome.
+	 * 
+	 * @return <code>true</code> se forem o mesmo tipo;
+	 *         <code>false</code> caso contrario.
+	 */
+	
 	public abstract boolean eIgual(Tipo tipo);
 
 	/**
