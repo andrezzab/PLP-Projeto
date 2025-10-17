@@ -1,11 +1,8 @@
 // Primeiro, carregue o CSV para a variável 'dados'
 LOAD "Testes/csvs/teste_drop.csv" AS dados;
 
-// Em seguida, execute as estatísticas na coluna 'idade' da variável 'dados'
-STATS dados ON "idade";
-
-// Você também pode calcular para outra coluna
-STATS dados ON "salario";
+// Calcula a média e ARMAZENA na variável 'media_salarial'
+MEAN dados.salario AS media_salarial;
 
 // 1. Conta quantos funcionários existem no total
 COUNT dados;

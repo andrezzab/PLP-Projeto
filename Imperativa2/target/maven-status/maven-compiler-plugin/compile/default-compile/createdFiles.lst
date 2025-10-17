@@ -25,6 +25,7 @@ li2\plp\expressions2\expression\Valor.class
 li2\plp\expressions2\memory\VariavelJaDeclaradaException.class
 li2\plp\expressions1\util\Tipo.class
 li2\plp\expressions2\expression\ExpAnd.class
+li2\plp\expressions2\expression\ValorDouble.class
 li2\plp\imperative1\command\IfThenElse.class
 li2\plp\imperative2\parser\Token.class
 li2\plp\imperative2\parser\Imp2Parser$JJCalls.class
@@ -33,6 +34,7 @@ li2\plp\imperative1\util\Lista.class
 li2\plp\functional2\expression\ValorIrredutivel.class
 li2\plp\expressions2\expression\ExpConcat.class
 li2\plp\imperative1\declaration\DeclaracaoVariavel.class
+li2\plp\imperative2\command\ComandoEstatisticoAbstrato.class
 li2\plp\expressions2\memory\IdentificadorJaDeclaradoException.class
 li2\plp\imperative1\memory\ContextoExecucaoImperativa.class
 li2\plp\imperative1\memory\ListaValor.class
@@ -55,6 +57,7 @@ li2\plp\imperative2\parser\Imp2Parser$LookaheadSuccess.class
 li2\plp\imperative2\parser\TokenMgrError.class
 li2\plp\expressions2\expression\ExpEquals.class
 li2\plp\imperative1\command\ComandoDeclaracao.class
+li2\plp\imperative2\command\Mean.class
 li2\plp\imperative2\parser\ParseException.class
 li2\plp\expressions2\memory\StackHandler.class
 li2\plp\expressions2\expression\ExpLength.class
@@ -65,16 +68,17 @@ li2\plp\imperative1\memory\AmbienteExecucaoImperativa.class
 li2\plp\imperative2\command\Load.class
 li2\plp\imperative1\command\SequenciaComando.class
 li2\plp\imperative2\command\ChamadaProcedimento.class
+li2\plp\imperative2\command\VarColuna.class
 li2\plp\expressions2\expression\ExpOr.class
 li2\plp\imperative2\command\ListaExpressao.class
 li2\plp\imperative2\parser\Imp2ParserConstants.class
 li2\plp\expressions2\expression\ValorInteiro.class
+li2\plp\imperative2\command\CalculadoraEstatisticas.class
 li2\plp\expressions2\declaration\DecVariavel.class
 li2\plp\expressions2\expression\ExpMenos.class
 li2\plp\imperative1\memory\AmbienteCompilacaoImperativa.class
 li2\plp\imperative2\declaration\DeclaracaoParametro.class
 li2\plp\imperative2\declaration\ListaDeclaracaoParametro.class
-li2\plp\imperative2\command\Estatisticas.class
 li2\plp\expressions2\expression\ExpNot.class
 li2\plp\expressions2\expression\ExpSoma.class
 li2\plp\expressions2\expression\Expressao.class

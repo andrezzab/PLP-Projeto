@@ -69,6 +69,7 @@ public abstract class ComandoEstatisticoAbstrato implements Comando {
         // Salva o resultado na variável de destino
         ambiente.map(idVariavelDestino, resultado);
         System.out.println("Resultado salvo na variável '" + idVariavelDestino + "'.");
+        System.out.println(">> " + this.getClass().getSimpleName() + " de " + nomeColuna + ": " + resultado.toString());
 
         return ambiente;
     }

@@ -55,7 +55,7 @@ public interface Imp2ParserConstants {
   /** RegularExpression Id. */
   int AS = 27;
   /** RegularExpression Id. */
-  int STATS = 28;
+  int MEAN = 28;
   /** RegularExpression Id. */
   int ON = 29;
   /** RegularExpression Id. */
@@ -186,7 +186,7 @@ public interface Imp2ParserConstants {
     "\"call\"",
     "\"LOAD\"",
     "\"AS\"",
-    "\"STATS\"",
+    "\"MEAN\"",
     "\"ON\"",
     "\"COUNT\"",
     "\"FILTER\"",

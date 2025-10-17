@@ -146,7 +146,7 @@ TOKEN : /* TOKENS DE IMPERATIVA 2 */
 | < CALL: "call" >
 | < LOAD: "LOAD" >
 | < AS: "AS" >
-| < STATS: "STATS" >
+| < MEAN: "MEAN" >
 | < ON : "ON" >
 | < COUNT: "COUNT" >
 | < FILTER: "FILTER" >
@@ -418,21 +418,26 @@ Load PLoad():
     )
 }
 
-Estatisticas PStats():
+VarColuna PVarColuna():
 {
     Token idVar, idCol;
-    Id var;
-    ValorString col;
 }
 {
-    <STATS> idVar=<IDENTIFIER> <ON> idCol=<STRING_LITERAL>
-    {
-        var = new Id(idVar.toString());
-        // Remove as aspas do literal de string
-        String nomeColuna = idCol.toString().replace("\"", "");
-        col = new ValorString(nomeColuna);
-        return new Estatisticas(var, col);
+    idVar=<IDENTIFIER> "." idCol=<IDENTIFIER>
+    { 
+        // Cria a "caixinha" com os dois Ids e a retorna como um único objeto
+        return new VarColuna(new Id(idVar.toString()), new Id(idCol.toString())); 
     }
+}
+
+Mean PMean():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <MEAN> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Mean(vc.var, vc.col, new Id(idDestino.toString())); }
 }
 
 Contagem PContagem():
@@ -724,7 +729,7 @@ Comando PComandoSimples() :
 		retorno = PLoad()
 	  | retorno = PContagem()
 	  | retorno = PFiltro()
-	  | retorno = PStats()
+	  | retorno = PMean()
       | retorno = PSkip()
       | retorno = PAtribuicao()
       | retorno = PComandoDeclaracao()
