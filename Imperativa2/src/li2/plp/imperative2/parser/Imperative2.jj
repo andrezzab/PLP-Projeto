@@ -147,6 +147,12 @@ TOKEN : /* TOKENS DE IMPERATIVA 2 */
 | < LOAD: "LOAD" >
 | < AS: "AS" >
 | < MEAN: "MEAN" >
+| < MEDIAN: "MEDIAN" >
+| < MODE: "MODE" >
+| < STD: "STD" >
+| < VARIANCE: "VARIANCE" >
+| < MIN: "MIN" >
+| < MAX: "MAX" >
 | < ON : "ON" >
 | < COUNT: "COUNT" >
 | < FILTER: "FILTER" >
@@ -440,6 +446,66 @@ Mean PMean():
     { return new Mean(vc.var, vc.col, new Id(idDestino.toString())); }
 }
 
+Median PMedian():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <MEDIAN> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Median(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
+Mode PMode():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <MODE> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Mode(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
+Std PStd():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <STD> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Std(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
+Variance PVariance():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <VARIANCE> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Variance(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
+Min PMin():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <MIN> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Min(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
+Max PMax():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <MAX> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Max(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
 Contagem PContagem():
 {
     Token idVar;
@@ -730,6 +796,12 @@ Comando PComandoSimples() :
 	  | retorno = PContagem()
 	  | retorno = PFiltro()
 	  | retorno = PMean()
+	  | retorno = PMedian()
+	  | retorno = PMode()
+	  | retorno = PStd()
+	  | retorno = PVariance()
+	  | retorno = PMin()
+	  | retorno = PMax()
       | retorno = PSkip()
       | retorno = PAtribuicao()
       | retorno = PComandoDeclaracao()
