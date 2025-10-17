@@ -5,35 +5,29 @@ import java.util.List;
 
 import li2.plp.expressions2.expression.Id;
 import li2.plp.expressions2.expression.Valor;
-import li2.plp.expressions2.expression.ValorString;
 import li2.plp.expressions2.memory.VariavelNaoDeclaradaException;
-import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative2.memory.AmbienteExecucaoImperativa2;
 
-public abstract class ComandoEstatisticoAbstrato implements Comando {
+public abstract class ComandoEstatisticoAbstrato extends AnaliseLinhas {
 
-    protected Id idVariavelCsv;
     protected Id nomeColuna;
     protected Id idVariavelDestino;
 
     public ComandoEstatisticoAbstrato(Id idVariavelCsv, Id nomeColuna, Id idVariavelDestino) {
-        this.idVariavelCsv = idVariavelCsv;
+        super(idVariavelCsv); // Chama o construtor da classe mãe
         this.nomeColuna = nomeColuna;
         this.idVariavelDestino = idVariavelDestino;
     }
 
-    // Método 'final' para que as subclasses não possam alterá-lo.
     @Override
     public final AmbienteExecucaoImperativa executar(AmbienteExecucaoImperativa amb) throws VariavelNaoDeclaradaException {
         AmbienteExecucaoImperativa2 ambiente = (AmbienteExecucaoImperativa2) amb;
 
-        Valor valorCsv = ambiente.get(idVariavelCsv);
-        if (!(valorCsv instanceof ValorString)) {
-            throw new RuntimeException("Erro: A variável '" + idVariavelCsv + "' não é um CSV.");
-        }
-        String[] linhas = ((ValorString) valorCsv).valor().split("\n");
+        // Usa o método herdado para obter as linhas, sem repetir código!
+        String[] linhas = getLinhasDoCsv(ambiente);
+        
         if (linhas.length < 2) {
              throw new RuntimeException("Erro: CSV '" + idVariavelCsv + "' não contém dados.");
         }
@@ -58,7 +52,7 @@ public abstract class ComandoEstatisticoAbstrato implements Comando {
                 try {
                     numeros.add(Double.parseDouble(celulas[indiceColuna].trim()));
                 } catch (NumberFormatException e) {
-                    // Ignora silenciosamente valores não numéricos.
+                    // Ignora valores não numéricos.
                 }
             }
         }
@@ -68,8 +62,8 @@ public abstract class ComandoEstatisticoAbstrato implements Comando {
 
         // Salva o resultado na variável de destino
         ambiente.map(idVariavelDestino, resultado);
-        System.out.println("Resultado salvo na variável '" + idVariavelDestino + "'.");
-        System.out.println(">> " + this.getClass().getSimpleName() + " de " + nomeColuna + ": " + resultado.toString());
+        // System.out.println("Resultado salvo na variável '" + idVariavelDestino + "'.");
+        System.out.println(">> " + this.getNomeEstatistica() + " de " + nomeColuna + ": " + resultado.toString());
 
         return ambiente;
     }
@@ -86,4 +80,8 @@ public abstract class ComandoEstatisticoAbstrato implements Comando {
         // Para simplificar, assumimos que está bem tipado.
         return true;
     }
+
+
+    //Pegar o nome da estatística a ser exibido no terminal
+    protected abstract String getNomeEstatistica();
 }

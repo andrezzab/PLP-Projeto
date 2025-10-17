@@ -93,986 +93,761 @@ public class Imp2Parser implements Imp2ParserConstants {
     }
 
   static final public Programa Input() throws ParseException {
-    trace_call("Input");
-    try {
     Programa retorno;
-      retorno = PPrograma();
-      jj_consume_token(0);
+    retorno = PPrograma();
+    jj_consume_token(0);
         {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("Input");
-    }
   }
 
   static final public Programa PPrograma() throws ParseException {
-    trace_call("PPrograma");
-    try {
         Comando retorno;
-      retorno = PComando();
+    retorno = PComando();
                 {if (true) return new Programa(retorno);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PPrograma");
-    }
   }
 
   static final public Comando PComando() throws ParseException {
-    trace_call("PComando");
-    try {
         Comando retorno;
-      if (jj_2_1(2147483647)) {
-        retorno = PSequenciaComando();
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case VAR:
-        case COMAND_SKIP:
-        case WHILE:
-        case READ:
-        case WRITE:
-        case IF:
-        case CALL:
-        case LOAD:
-        case MEAN:
-        case COUNT:
-        case FILTER:
-        case IDENTIFIER:
-        case LPAREN:
-        case LBRACE:
-          retorno = PComandoSimples();
-          break;
-        default:
-          jj_la1[0] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-      }
-        {if (true) return retorno;}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PComando");
-    }
-  }
-
-  static final public SequenciaComando PSequenciaComando() throws ParseException {
-    trace_call("PSequenciaComando");
-    try {
-        Comando c1;
-        Comando c2;
-      c1 = PComandoSimples();
-      jj_consume_token(SEMICOLON);
-      c2 = PComando();
-         {if (true) return new SequenciaComando(c1, c2);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PSequenciaComando");
-    }
-  }
-
-  static final public IO PIO() throws ParseException {
-    trace_call("PIO");
-    try {
-        IO retorno;
+    if (jj_2_1(2147483647)) {
+      retorno = PSequenciaComando();
+    } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VAR:
+      case COMAND_SKIP:
+      case WHILE:
       case READ:
-        retorno = PRead();
-        break;
       case WRITE:
-        retorno = PWrite();
+      case IF:
+      case CALL:
+      case LOAD:
+      case MEAN:
+      case COUNT:
+      case FILTER:
+      case IDENTIFIER:
+      case LPAREN:
+      case LBRACE:
+        retorno = PComandoSimples();
         break;
       default:
-        jj_la1[1] = jj_gen;
+        jj_la1[0] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+    }
+        {if (true) return retorno;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public SequenciaComando PSequenciaComando() throws ParseException {
+        Comando c1;
+        Comando c2;
+    c1 = PComandoSimples();
+    jj_consume_token(SEMICOLON);
+    c2 = PComando();
+         {if (true) return new SequenciaComando(c1, c2);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public IO PIO() throws ParseException {
+        IO retorno;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case READ:
+      retorno = PRead();
+      break;
+    case WRITE:
+      retorno = PWrite();
+      break;
+    default:
+      jj_la1[1] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
          {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PIO");
-    }
   }
 
   static final public Read PRead() throws ParseException {
-    trace_call("PRead");
-    try {
         Id id;
-      jj_consume_token(READ);
-      jj_consume_token(LPAREN);
-      id = PId();
-      jj_consume_token(RPAREN);
+    jj_consume_token(READ);
+    jj_consume_token(LPAREN);
+    id = PId();
+    jj_consume_token(RPAREN);
          {if (true) return new Read (id);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PRead");
-    }
   }
 
   static final public Write PWrite() throws ParseException {
-    trace_call("PWrite");
-    try {
         Expressao exp;
-      jj_consume_token(WRITE);
-      jj_consume_token(LPAREN);
-      exp = PExpressao();
-      jj_consume_token(RPAREN);
+    jj_consume_token(WRITE);
+    jj_consume_token(LPAREN);
+    exp = PExpressao();
+    jj_consume_token(RPAREN);
          {if (true) return new Write(exp);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PWrite");
-    }
   }
 
   static final public IfThenElse PIfThenElse() throws ParseException {
-    trace_call("PIfThenElse");
-    try {
         Expressao expressao;
         Comando comandoThen;
         Comando comandoElse;
-      jj_consume_token(IF);
-      expressao = PExpressao();
-      jj_consume_token(THEN);
-      comandoThen = PComando();
-      jj_consume_token(ELSE);
-      comandoElse = PComando();
+    jj_consume_token(IF);
+    expressao = PExpressao();
+    jj_consume_token(THEN);
+    comandoThen = PComando();
+    jj_consume_token(ELSE);
+    comandoElse = PComando();
          {if (true) return new IfThenElse (expressao, comandoThen, comandoElse);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PIfThenElse");
-    }
   }
 
   static final public While PWhile() throws ParseException {
-    trace_call("PWhile");
-    try {
         Expressao expressao;
         Comando comando;
-      jj_consume_token(WHILE);
-      expressao = PExpressao();
-      jj_consume_token(DO);
-      comando = PComando();
+    jj_consume_token(WHILE);
+    expressao = PExpressao();
+    jj_consume_token(DO);
+    comando = PComando();
          {if (true) return new While(expressao, comando);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PWhile");
-    }
   }
 
   static final public Skip PSkip() throws ParseException {
-    trace_call("PSkip");
-    try {
-      jj_consume_token(COMAND_SKIP);
+    jj_consume_token(COMAND_SKIP);
          {if (true) return new Skip();}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PSkip");
-    }
   }
 
   static final public Load PLoad() throws ParseException {
-    trace_call("PLoad");
-    try {
     Token pathToken;
     Token idTok = null;
     String path;
     String alias;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LOAD:
+      jj_consume_token(LOAD);
+      pathToken = jj_consume_token(STRING_LITERAL);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LOAD:
-        jj_consume_token(LOAD);
-        pathToken = jj_consume_token(STRING_LITERAL);
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case AS:
-          jj_consume_token(AS);
-          idTok = jj_consume_token(IDENTIFIER);
-          break;
-        default:
-          jj_la1[2] = jj_gen;
-          ;
-        }
+      case AS:
+        jj_consume_token(AS);
+        idTok = jj_consume_token(IDENTIFIER);
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        ;
+      }
             path = pathToken.image.substring(1, pathToken.image.length() - 1); // Remove as aspas
             alias = (idTok != null) ? idTok.image : null;
             {if (true) return new Load(path, alias);}
-        break;
-      case VAR:
-        jj_consume_token(VAR);
-        idTok = jj_consume_token(IDENTIFIER);
-        jj_consume_token(LOAD);
-        pathToken = jj_consume_token(STRING_LITERAL);
+      break;
+    case VAR:
+      jj_consume_token(VAR);
+      idTok = jj_consume_token(IDENTIFIER);
+      jj_consume_token(LOAD);
+      pathToken = jj_consume_token(STRING_LITERAL);
             path = pathToken.image.substring(1, pathToken.image.length() - 1); // Remove as aspas
             {if (true) return new Load(path, idTok.image);}
-        break;
-      default:
-        jj_la1[3] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PLoad");
+      break;
+    default:
+      jj_la1[3] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
+    throw new Error("Missing return statement in function");
   }
 
   static final public VarColuna PVarColuna() throws ParseException {
-    trace_call("PVarColuna");
-    try {
     Token idVar, idCol;
-      idVar = jj_consume_token(IDENTIFIER);
-      jj_consume_token(DOT);
-      idCol = jj_consume_token(IDENTIFIER);
+    idVar = jj_consume_token(IDENTIFIER);
+    jj_consume_token(DOT);
+    idCol = jj_consume_token(IDENTIFIER);
         // Cria a "caixinha" com os dois Ids e a retorna como um único objeto
         {if (true) return new VarColuna(new Id(idVar.toString()), new Id(idCol.toString()));}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PVarColuna");
-    }
   }
 
   static final public Mean PMean() throws ParseException {
-    trace_call("PMean");
-    try {
     VarColuna vc;
     Token idDestino;
-      jj_consume_token(MEAN);
-      vc = PVarColuna();
-      jj_consume_token(AS);
-      idDestino = jj_consume_token(IDENTIFIER);
+    jj_consume_token(MEAN);
+    vc = PVarColuna();
+    jj_consume_token(AS);
+    idDestino = jj_consume_token(IDENTIFIER);
       {if (true) return new Mean(vc.var, vc.col, new Id(idDestino.toString()));}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PMean");
-    }
   }
 
   static final public Contagem PContagem() throws ParseException {
-    trace_call("PContagem");
-    try {
     Token idVar;
-      jj_consume_token(COUNT);
-      idVar = jj_consume_token(IDENTIFIER);
+    jj_consume_token(COUNT);
+    idVar = jj_consume_token(IDENTIFIER);
         {if (true) return new Contagem(new Id(idVar.toString()));}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PContagem");
-    }
   }
 
   static final public Filtro PFiltro() throws ParseException {
-    trace_call("PFiltro");
-    try {
     Token idOrigem, idDestino;
     Expressao cond;
-      jj_consume_token(FILTER);
-      idOrigem = jj_consume_token(IDENTIFIER);
-      jj_consume_token(INTO);
-      idDestino = jj_consume_token(IDENTIFIER);
-      jj_consume_token(WHERE);
-      cond = PExpressao();
+    jj_consume_token(FILTER);
+    idOrigem = jj_consume_token(IDENTIFIER);
+    jj_consume_token(INTO);
+    idDestino = jj_consume_token(IDENTIFIER);
+    jj_consume_token(WHERE);
+    cond = PExpressao();
         {if (true) return new Filtro(new Id(idOrigem.toString()), new Id(idDestino.toString()), cond);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PFiltro");
-    }
   }
 
   static final public Atribuicao PAtribuicao() throws ParseException {
-    trace_call("PAtribuicao");
-    try {
         Id id;
         Expressao exp;
-      id = PId();
-      jj_consume_token(ATTRIB);
-      exp = PExpressao();
+    id = PId();
+    jj_consume_token(ATTRIB);
+    exp = PExpressao();
                 {if (true) return new Atribuicao(id, exp);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PAtribuicao");
-    }
   }
 
   static final public Id PId() throws ParseException {
-    trace_call("PId");
-    try {
         Token token;
-      token = jj_consume_token(IDENTIFIER);
+    token = jj_consume_token(IDENTIFIER);
                 {if (true) return new Id(token.toString());}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PId");
-    }
   }
 
   static final public Valor PValorInteiro() throws ParseException {
-    trace_call("PValorInteiro");
-    try {
         Token token;
-      token = jj_consume_token(INTEGER_LITERAL);
+    token = jj_consume_token(INTEGER_LITERAL);
                 {if (true) return new ValorInteiro(Integer.parseInt(token.toString()));}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PValorInteiro");
-    }
   }
 
   static final public Valor PValorBooleano() throws ParseException {
-    trace_call("PValorBooleano");
-    try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case FALSE:
-        jj_consume_token(FALSE);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case FALSE:
+      jj_consume_token(FALSE);
                     {if (true) return new ValorBooleano(false);}
-        break;
-      case TRUE:
-        jj_consume_token(TRUE);
+      break;
+    case TRUE:
+      jj_consume_token(TRUE);
                     {if (true) return new ValorBooleano(true);}
-        break;
-      default:
-        jj_la1[4] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PValorBooleano");
+      break;
+    default:
+      jj_la1[4] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
+    throw new Error("Missing return statement in function");
   }
 
   static final public Valor PValorString() throws ParseException {
-    trace_call("PValorString");
-    try {
         Token token;
-      token = jj_consume_token(STRING_LITERAL);
+    token = jj_consume_token(STRING_LITERAL);
                 String tokenStr = token.toString();
                 tokenStr = tokenStr.substring(1,tokenStr.length()-1);
                 {if (true) return new ValorString(tokenStr);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PValorString");
-    }
   }
 
   static final public Valor PValor() throws ParseException {
-    trace_call("PValor");
-    try {
         Valor retorno;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case INTEGER_LITERAL:
-        retorno = PValorInteiro();
-        break;
-      case TRUE:
-      case FALSE:
-        retorno = PValorBooleano();
-        break;
-      case STRING_LITERAL:
-        retorno = PValorString();
-        break;
-      default:
-        jj_la1[5] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INTEGER_LITERAL:
+      retorno = PValorInteiro();
+      break;
+    case TRUE:
+    case FALSE:
+      retorno = PValorBooleano();
+      break;
+    case STRING_LITERAL:
+      retorno = PValorString();
+      break;
+    default:
+      jj_la1[5] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
                 {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PValor");
-    }
   }
 
   static final public Expressao PExpMenos() throws ParseException {
-    trace_call("PExpMenos");
-    try {
         Expressao retorno;
-      jj_consume_token(MINUS);
-      retorno = PExpressao();
+    jj_consume_token(MINUS);
+    retorno = PExpressao();
                 {if (true) return new ExpMenos(retorno);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpMenos");
-    }
   }
 
   static final public Expressao PExpNot() throws ParseException {
-    trace_call("PExpNot");
-    try {
         Expressao retorno;
-      jj_consume_token(NOT);
-      retorno = PExpressao();
+    jj_consume_token(NOT);
+    retorno = PExpressao();
                 {if (true) return new ExpNot(retorno);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpNot");
-    }
   }
 
   static final public Expressao PExpLength() throws ParseException {
-    trace_call("PExpLength");
-    try {
         Expressao retorno;
-      jj_consume_token(LENGTH);
-      retorno = PExpressao();
+    jj_consume_token(LENGTH);
+    retorno = PExpressao();
                 {if (true) return new ExpLength(retorno);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpLength");
-    }
   }
 
   static final public Expressao PExpPrimaria() throws ParseException {
-    trace_call("PExpPrimaria");
-    try {
     Expressao retorno;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IDENTIFIER:
+      retorno = PId();
+      break;
+    case TRUE:
+    case FALSE:
+    case INTEGER_LITERAL:
+    case STRING_LITERAL:
+      retorno = PValor();
+      break;
+    case LPAREN:
+      jj_consume_token(LPAREN);
+      retorno = PExpressao();
+      jj_consume_token(RPAREN);
+      break;
+    default:
+      jj_la1[6] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+                {if (true) return retorno;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public Expressao PExpUnaria() throws ParseException {
+        Expressao retorno;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case MINUS:
+      retorno = PExpMenos();
+      break;
+    case NOT:
+      retorno = PExpNot();
+      break;
+    case LENGTH:
+      retorno = PExpLength();
+      break;
+    default:
+      jj_la1[7] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+                {if (true) return retorno;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public Expressao PExpBinaria() throws ParseException {
+        Expressao retorno, param2;
+    if (jj_2_2(2147483647)) {
+      retorno = PExpConcat();
+    } else if (jj_2_3(2147483647)) {
+      retorno = PExpSub();
+    } else if (jj_2_4(2147483647)) {
+      retorno = PExpAnd();
+    } else if (jj_2_5(2147483647)) {
+      retorno = PExpOr();
+    } else if (jj_2_6(2147483647)) {
+      retorno = PExpEquals();
+    } else if (jj_2_7(2147483647)) {
+      retorno = PExpSoma();
+    } else {
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+                {if (true) return retorno;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public ExpSoma PExpSoma() throws ParseException {
+        Expressao esq;
+        Expressao dir;
+    esq = PExpPrimaria();
+    jj_consume_token(PLUS);
+    dir = PExpressao();
+         {if (true) return new ExpSoma(esq, dir);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public ExpSub PExpSub() throws ParseException {
+        Expressao esq;
+        Expressao dir;
+    esq = PExpPrimaria();
+    jj_consume_token(MINUS);
+    dir = PExpressao();
+         {if (true) return new ExpSub(esq, dir);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public ExpAnd PExpAnd() throws ParseException {
+        Expressao esq;
+        Expressao dir;
+    esq = PExpPrimaria();
+    jj_consume_token(AND);
+    dir = PExpressao();
+         {if (true) return new ExpAnd(esq, dir);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public ExpOr PExpOr() throws ParseException {
+        Expressao esq;
+        Expressao dir;
+    esq = PExpPrimaria();
+    jj_consume_token(OR);
+    dir = PExpressao();
+         {if (true) return new ExpOr(esq, dir);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public ExpEquals PExpEquals() throws ParseException {
+        Expressao esq;
+        Expressao dir;
+    esq = PExpPrimaria();
+    jj_consume_token(EQ);
+    dir = PExpressao();
+         {if (true) return new ExpEquals(esq, dir);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public ExpConcat PExpConcat() throws ParseException {
+        Expressao esq;
+        Expressao dir;
+    esq = PExpPrimaria();
+    jj_consume_token(CONCAT);
+    dir = PExpressao();
+         {if (true) return new ExpConcat(esq, dir);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public Expressao PExpressao() throws ParseException {
+        Expressao retorno;
+    if (jj_2_8(2)) {
+      retorno = PExpUnaria();
+    } else if (jj_2_9(2147483647)) {
+      retorno = PExpBinaria();
+    } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IDENTIFIER:
-        retorno = PId();
-        break;
       case TRUE:
       case FALSE:
       case INTEGER_LITERAL:
       case STRING_LITERAL:
-        retorno = PValor();
-        break;
+      case IDENTIFIER:
       case LPAREN:
-        jj_consume_token(LPAREN);
-        retorno = PExpressao();
-        jj_consume_token(RPAREN);
+        retorno = PExpPrimaria();
         break;
       default:
-        jj_la1[6] = jj_gen;
+        jj_la1[8] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+    }
                 {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpPrimaria");
-    }
-  }
-
-  static final public Expressao PExpUnaria() throws ParseException {
-    trace_call("PExpUnaria");
-    try {
-        Expressao retorno;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case MINUS:
-        retorno = PExpMenos();
-        break;
-      case NOT:
-        retorno = PExpNot();
-        break;
-      case LENGTH:
-        retorno = PExpLength();
-        break;
-      default:
-        jj_la1[7] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-                {if (true) return retorno;}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpUnaria");
-    }
-  }
-
-  static final public Expressao PExpBinaria() throws ParseException {
-    trace_call("PExpBinaria");
-    try {
-        Expressao retorno, param2;
-      if (jj_2_2(2147483647)) {
-        retorno = PExpConcat();
-      } else if (jj_2_3(2147483647)) {
-        retorno = PExpSub();
-      } else if (jj_2_4(2147483647)) {
-        retorno = PExpAnd();
-      } else if (jj_2_5(2147483647)) {
-        retorno = PExpOr();
-      } else if (jj_2_6(2147483647)) {
-        retorno = PExpEquals();
-      } else if (jj_2_7(2147483647)) {
-        retorno = PExpSoma();
-      } else {
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-                {if (true) return retorno;}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpBinaria");
-    }
-  }
-
-  static final public ExpSoma PExpSoma() throws ParseException {
-    trace_call("PExpSoma");
-    try {
-        Expressao esq;
-        Expressao dir;
-      esq = PExpPrimaria();
-      jj_consume_token(PLUS);
-      dir = PExpressao();
-         {if (true) return new ExpSoma(esq, dir);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpSoma");
-    }
-  }
-
-  static final public ExpSub PExpSub() throws ParseException {
-    trace_call("PExpSub");
-    try {
-        Expressao esq;
-        Expressao dir;
-      esq = PExpPrimaria();
-      jj_consume_token(MINUS);
-      dir = PExpressao();
-         {if (true) return new ExpSub(esq, dir);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpSub");
-    }
-  }
-
-  static final public ExpAnd PExpAnd() throws ParseException {
-    trace_call("PExpAnd");
-    try {
-        Expressao esq;
-        Expressao dir;
-      esq = PExpPrimaria();
-      jj_consume_token(AND);
-      dir = PExpressao();
-         {if (true) return new ExpAnd(esq, dir);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpAnd");
-    }
-  }
-
-  static final public ExpOr PExpOr() throws ParseException {
-    trace_call("PExpOr");
-    try {
-        Expressao esq;
-        Expressao dir;
-      esq = PExpPrimaria();
-      jj_consume_token(OR);
-      dir = PExpressao();
-         {if (true) return new ExpOr(esq, dir);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpOr");
-    }
-  }
-
-  static final public ExpEquals PExpEquals() throws ParseException {
-    trace_call("PExpEquals");
-    try {
-        Expressao esq;
-        Expressao dir;
-      esq = PExpPrimaria();
-      jj_consume_token(EQ);
-      dir = PExpressao();
-         {if (true) return new ExpEquals(esq, dir);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpEquals");
-    }
-  }
-
-  static final public ExpConcat PExpConcat() throws ParseException {
-    trace_call("PExpConcat");
-    try {
-        Expressao esq;
-        Expressao dir;
-      esq = PExpPrimaria();
-      jj_consume_token(CONCAT);
-      dir = PExpressao();
-         {if (true) return new ExpConcat(esq, dir);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpConcat");
-    }
-  }
-
-  static final public Expressao PExpressao() throws ParseException {
-    trace_call("PExpressao");
-    try {
-        Expressao retorno;
-      if (jj_2_8(2)) {
-        retorno = PExpUnaria();
-      } else if (jj_2_9(2147483647)) {
-        retorno = PExpBinaria();
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case TRUE:
-        case FALSE:
-        case INTEGER_LITERAL:
-        case STRING_LITERAL:
-        case IDENTIFIER:
-        case LPAREN:
-          retorno = PExpPrimaria();
-          break;
-        default:
-          jj_la1[8] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-      }
-                {if (true) return retorno;}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PExpressao");
-    }
   }
 
 /*  ADICIONADO OU MODIFICADO DA Imperativa1 PARA A Imperativa2  */
   static final public Comando PComandoSimples() throws ParseException {
-    trace_call("PComandoSimples");
-    try {
         Comando retorno;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case VAR:
-      case LOAD:
-        retorno = PLoad();
-        break;
-      case COUNT:
-        retorno = PContagem();
-        break;
-      case FILTER:
-        retorno = PFiltro();
-        break;
-      case MEAN:
-        retorno = PMean();
-        break;
-      case COMAND_SKIP:
-        retorno = PSkip();
-        break;
-      case IDENTIFIER:
-        retorno = PAtribuicao();
-        break;
-      case LBRACE:
-        retorno = PComandoDeclaracao();
-        break;
-      case WHILE:
-        retorno = PWhile();
-        break;
-      case IF:
-        retorno = PIfThenElse();
-        break;
-      case READ:
-      case WRITE:
-        retorno = PIO();
-        break;
-      case LPAREN:
-        jj_consume_token(LPAREN);
-        retorno = PComando();
-        jj_consume_token(RPAREN);
-        break;
-      case CALL:
-        retorno = PChamadaProcedimento();
-        break;
-      default:
-        jj_la1[9] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case VAR:
+    case LOAD:
+      retorno = PLoad();
+      break;
+    case COUNT:
+      retorno = PContagem();
+      break;
+    case FILTER:
+      retorno = PFiltro();
+      break;
+    case MEAN:
+      retorno = PMean();
+      break;
+    case COMAND_SKIP:
+      retorno = PSkip();
+      break;
+    case IDENTIFIER:
+      retorno = PAtribuicao();
+      break;
+    case LBRACE:
+      retorno = PComandoDeclaracao();
+      break;
+    case WHILE:
+      retorno = PWhile();
+      break;
+    case IF:
+      retorno = PIfThenElse();
+      break;
+    case READ:
+    case WRITE:
+      retorno = PIO();
+      break;
+    case LPAREN:
+      jj_consume_token(LPAREN);
+      retorno = PComando();
+      jj_consume_token(RPAREN);
+      break;
+    case CALL:
+      retorno = PChamadaProcedimento();
+      break;
+    default:
+      jj_la1[9] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
         {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PComandoSimples");
-    }
   }
 
   static final public ChamadaProcedimento PChamadaProcedimento() throws ParseException {
-    trace_call("PChamadaProcedimento");
-    try {
         Id nomeProcedimento;
         ListaExpressao parametrosAtuais;
-      jj_consume_token(CALL);
-      nomeProcedimento = PId();
-      jj_consume_token(LPAREN);
-      parametrosAtuais = PListaExpressao();
-      jj_consume_token(RPAREN);
+    jj_consume_token(CALL);
+    nomeProcedimento = PId();
+    jj_consume_token(LPAREN);
+    parametrosAtuais = PListaExpressao();
+    jj_consume_token(RPAREN);
                 {if (true) return new ChamadaProcedimento(nomeProcedimento, parametrosAtuais);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PChamadaProcedimento");
-    }
   }
 
   static final public ComandoDeclaracao PComandoDeclaracao() throws ParseException {
-    trace_call("PComandoDeclaracao");
-    try {
         Declaracao dec;
         Comando comando;
-      jj_consume_token(LBRACE);
-      dec = PDeclaracao();
-      jj_consume_token(SEMICOLON);
-      comando = PComando();
-      jj_consume_token(RBRACE);
+    jj_consume_token(LBRACE);
+    dec = PDeclaracao();
+    jj_consume_token(SEMICOLON);
+    comando = PComando();
+    jj_consume_token(RBRACE);
                 {if (true) return new ComandoDeclaracao(dec, comando);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PComandoDeclaracao");
-    }
   }
 
   static final public Declaracao PDeclaracao() throws ParseException {
-    trace_call("PDeclaracao");
-    try {
         Declaracao retorno;
-      if (jj_2_10(2147483647)) {
-        retorno = PDeclaracaoComposta();
-      } else if (jj_2_11(2147483647)) {
-        retorno = PDeclaracaoComposta();
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case VAR:
-          retorno = PDeclaracaoVariavel();
-          break;
-        case PROC:
-          retorno = PDeclaracaoProcedimento();
-          break;
-        case LPAREN:
-          jj_consume_token(LPAREN);
-          retorno = PDeclaracao();
-          jj_consume_token(RPAREN);
-          break;
-        default:
-          jj_la1[10] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
+    if (jj_2_10(2147483647)) {
+      retorno = PDeclaracaoComposta();
+    } else if (jj_2_11(2147483647)) {
+      retorno = PDeclaracaoComposta();
+    } else {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VAR:
+        retorno = PDeclaracaoVariavel();
+        break;
+      case PROC:
+        retorno = PDeclaracaoProcedimento();
+        break;
+      case LPAREN:
+        jj_consume_token(LPAREN);
+        retorno = PDeclaracao();
+        jj_consume_token(RPAREN);
+        break;
+      default:
+        jj_la1[10] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
+    }
          {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PDeclaracao");
-    }
   }
 
   static final public DeclaracaoComposta PDeclaracaoComposta() throws ParseException {
-    trace_call("PDeclaracaoComposta");
-    try {
         Declaracao d1;
         Declaracao d2;
-      if (jj_2_12(2147483647)) {
-        d1 = PDeclaracaoVariavel();
-        jj_consume_token(COMMA);
-        d2 = PDeclaracao();
-      } else if (jj_2_13(2147483647)) {
-        d1 = PDeclaracaoProcedimento();
-        jj_consume_token(COMMA);
-        d2 = PDeclaracao();
-      } else {
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
+    if (jj_2_12(2147483647)) {
+      d1 = PDeclaracaoVariavel();
+      jj_consume_token(COMMA);
+      d2 = PDeclaracao();
+    } else if (jj_2_13(2147483647)) {
+      d1 = PDeclaracaoProcedimento();
+      jj_consume_token(COMMA);
+      d2 = PDeclaracao();
+    } else {
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
          {if (true) return new DeclaracaoComposta(d1, d2);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PDeclaracaoComposta");
-    }
   }
 
   static final public DeclaracaoProcedimento PDeclaracaoProcedimento() throws ParseException {
-    trace_call("PDeclaracaoProcedimento");
-    try {
         Id nome;
         DefProcedimento defProcedimento;
-      if (jj_2_14(2147483647)) {
+    if (jj_2_14(2147483647)) {
+      jj_consume_token(PROC);
+      nome = PId();
+      jj_consume_token(LPAREN);
+      jj_consume_token(RPAREN);
+      defProcedimento = PDefProcedimento();
+    } else {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PROC:
         jj_consume_token(PROC);
         nome = PId();
         jj_consume_token(LPAREN);
-        jj_consume_token(RPAREN);
         defProcedimento = PDefProcedimento();
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case PROC:
-          jj_consume_token(PROC);
-          nome = PId();
-          jj_consume_token(LPAREN);
-          defProcedimento = PDefProcedimento();
-          break;
-        default:
-          jj_la1[11] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-      }
-            {if (true) return new DeclaracaoProcedimento (nome, defProcedimento);}
-    throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PDeclaracaoProcedimento");
-    }
-  }
-
-  static final public DefProcedimento PDefProcedimento() throws ParseException {
-    trace_call("PDefProcedimento");
-    try {
-        ListaDeclaracaoParametro listaPar = null;
-        Comando comando;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LBRACE:
-        jj_consume_token(LBRACE);
-        comando = PComando();
-        jj_consume_token(RBRACE);
-        break;
-      case INT:
-      case BOOLEAN:
-      case STRING:
-      case RPAREN:
-      case COMMA:
-        listaPar = PListaDeclaracaoParametro();
-        jj_consume_token(RPAREN);
-        jj_consume_token(LBRACE);
-        comando = PComando();
-        jj_consume_token(RBRACE);
         break;
       default:
-        jj_la1[12] = jj_gen;
+        jj_la1[11] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+    }
+            {if (true) return new DeclaracaoProcedimento (nome, defProcedimento);}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public DefProcedimento PDefProcedimento() throws ParseException {
+        ListaDeclaracaoParametro listaPar = null;
+        Comando comando;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LBRACE:
+      jj_consume_token(LBRACE);
+      comando = PComando();
+      jj_consume_token(RBRACE);
+      break;
+    case INT:
+    case BOOLEAN:
+    case STRING:
+    case RPAREN:
+    case COMMA:
+      listaPar = PListaDeclaracaoParametro();
+      jj_consume_token(RPAREN);
+      jj_consume_token(LBRACE);
+      comando = PComando();
+      jj_consume_token(RBRACE);
+      break;
+    default:
+      jj_la1[12] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
             if(listaPar == null) {
                 listaPar = new ListaDeclaracaoParametro();
             }
             {if (true) return new DefProcedimento (listaPar, comando);}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PDefProcedimento");
-    }
   }
 
   static final public Tipo PTipo() throws ParseException {
-    trace_call("PTipo");
-    try {
         Tipo tipo;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case INT:
-        jj_consume_token(INT);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INT:
+      jj_consume_token(INT);
                tipo = TipoPrimitivo.INTEIRO;
-        break;
-      case BOOLEAN:
-        jj_consume_token(BOOLEAN);
+      break;
+    case BOOLEAN:
+      jj_consume_token(BOOLEAN);
                    tipo = TipoPrimitivo.BOOLEANO;
-        break;
-      case STRING:
-        jj_consume_token(STRING);
+      break;
+    case STRING:
+      jj_consume_token(STRING);
                   tipo = TipoPrimitivo.STRING;
-        break;
-      default:
-        jj_la1[13] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
+      break;
+    default:
+      jj_la1[13] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
                 {if (true) return tipo;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PTipo");
-    }
   }
 
   static final public ListaDeclaracaoParametro PListaDeclaracaoParametro() throws ParseException {
-    trace_call("PListaDeclaracaoParametro");
-    try {
         Id id;
         Tipo tipo;
         ListaDeclaracaoParametro lista = null;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case INT:
-      case BOOLEAN:
-      case STRING:
-        tipo = PTipo();
-        id = PId();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INT:
+    case BOOLEAN:
+    case STRING:
+      tipo = PTipo();
+      id = PId();
             lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id, tipo));
+      break;
+    default:
+      jj_la1[14] = jj_gen;
+      ;
+    }
+    label_1:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMA:
+        ;
         break;
       default:
-        jj_la1[14] = jj_gen;
-        ;
+        jj_la1[15] = jj_gen;
+        break label_1;
       }
-      label_1:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case COMMA:
-          ;
-          break;
-        default:
-          jj_la1[15] = jj_gen;
-          break label_1;
-        }
-        jj_consume_token(COMMA);
-        tipo = PTipo();
-        id = PId();
+      jj_consume_token(COMMA);
+      tipo = PTipo();
+      id = PId();
            lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id, tipo), lista);
-      }
+    }
                 if (lista == null) {
                         lista = new ListaDeclaracaoParametro();
                 }
                 {if (true) return lista;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PListaDeclaracaoParametro");
-    }
   }
 
   static final public ListaExpressao PListaExpressao() throws ParseException {
-    trace_call("PListaExpressao");
-    try {
         Expressao exp;
         ListaExpressao lista = null;
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case NOT:
-      case LENGTH:
-      case TRUE:
-      case FALSE:
-      case INTEGER_LITERAL:
-      case STRING_LITERAL:
-      case IDENTIFIER:
-      case LPAREN:
-      case MINUS:
-        exp = PExpressao();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NOT:
+    case LENGTH:
+    case TRUE:
+    case FALSE:
+    case INTEGER_LITERAL:
+    case STRING_LITERAL:
+    case IDENTIFIER:
+    case LPAREN:
+    case MINUS:
+      exp = PExpressao();
                                lista = new ListaExpressao(exp);
+      break;
+    default:
+      jj_la1[16] = jj_gen;
+      ;
+    }
+    label_2:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMA:
+        ;
         break;
       default:
-        jj_la1[16] = jj_gen;
-        ;
+        jj_la1[17] = jj_gen;
+        break label_2;
       }
-      label_2:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case COMMA:
-          ;
-          break;
-        default:
-          jj_la1[17] = jj_gen;
-          break label_2;
-        }
-        jj_consume_token(COMMA);
-        exp = PExpressao();
+      jj_consume_token(COMMA);
+      exp = PExpressao();
                                                                                                   lista = new ListaExpressao(exp, lista);
-      }
+    }
                 if (lista == null) {
                         lista = new ListaExpressao();
                 }
                 {if (true) return lista;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PListaExpressao");
-    }
   }
 
   static final public DeclaracaoVariavel PDeclaracaoVariavel() throws ParseException {
-    trace_call("PDeclaracaoVariavel");
-    try {
         Id id;
         Expressao exp;
         DeclaracaoVariavel retorno;
-      jj_consume_token(VAR);
-      id = PId();
-      jj_consume_token(ASSIGN);
-      exp = PExpressao();
+    jj_consume_token(VAR);
+    id = PId();
+    jj_consume_token(ASSIGN);
+    exp = PExpressao();
                  retorno = new DeclaracaoVariavel(id, exp);
                 {if (true) return retorno;}
     throw new Error("Missing return statement in function");
-    } finally {
-      trace_return("PDeclaracaoVariavel");
-    }
   }
 
   static private boolean jj_2_1(int xla) {
@@ -2157,7 +1932,6 @@ public class Imp2Parser implements Imp2ParserConstants {
           }
         }
       }
-      trace_token(token, "");
       return token;
     }
     token = oldToken;
@@ -2195,7 +1969,6 @@ public class Imp2Parser implements Imp2ParserConstants {
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
     jj_gen++;
-      trace_token(token, " (in getNextToken)");
     return token;
   }
 
@@ -2287,55 +2060,12 @@ public class Imp2Parser implements Imp2ParserConstants {
     return new ParseException(token, exptokseq, tokenImage);
   }
 
-  static private int trace_indent = 0;
-  static private boolean trace_enabled = true;
-
-/** Enable tracing. */
+  /** Enable tracing. */
   static final public void enable_tracing() {
-    trace_enabled = true;
   }
 
-/** Disable tracing. */
+  /** Disable tracing. */
   static final public void disable_tracing() {
-    trace_enabled = false;
-  }
-
-  static private void trace_call(String s) {
-    if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.println("Call:   " + s);
-    }
-    trace_indent = trace_indent + 2;
-  }
-
-  static private void trace_return(String s) {
-    trace_indent = trace_indent - 2;
-    if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.println("Return: " + s);
-    }
-  }
-
-  static private void trace_token(Token t, String where) {
-    if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.print("Consumed token: <" + tokenImage[t.kind]);
-      if (t.kind != 0 && !tokenImage[t.kind].equals("\"" + t.image + "\"")) {
-        System.out.print(": \"" + t.image + "\"");
-      }
-      System.out.println(" at line " + t.beginLine + " column " + t.beginColumn + ">" + where);
-    }
-  }
-
-  static private void trace_scan(Token t1, int t2) {
-    if (trace_enabled) {
-      for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
-      System.out.print("Visited token: <" + tokenImage[t1.kind]);
-      if (t1.kind != 0 && !tokenImage[t1.kind].equals("\"" + t1.image + "\"")) {
-        System.out.print(": \"" + t1.image + "\"");
-      }
-      System.out.println(" at line " + t1.beginLine + " column " + t1.beginColumn + ">; Expected token: <" + tokenImage[t2] + ">");
-    }
   }
 
   static private void jj_rescan_token() {

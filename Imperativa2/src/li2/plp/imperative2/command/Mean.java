@@ -18,4 +18,9 @@ public class Mean extends ComandoEstatisticoAbstrato {
         // Se não tiver, pode usar ValorString ou adaptar para ValorInteiro.
         return new ValorDouble(media); 
     }
+
+    @Override
+    protected String getNomeEstatistica() {
+        return "Média";
+}
 }

@@ -13,19 +13,19 @@ import li2.plp.expressions2.memory.IdentificadorJaDeclaradoException;
 import li2.plp.expressions2.memory.IdentificadorNaoDeclaradoException;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
-import li2.plp.imperative1.command.Comando;
 import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative2.memory.AmbienteExecucaoImperativa2;
 
-public class Filtro implements Comando {
+public class Filtro extends AnaliseLinhas {
 
-    private Id idCsvOrigem;
+    // O idCsvOrigem agora é herdado da classe mãe 'ComandoDeAnalise'
     private Id idCsvDestino;
     private Expressao condicao;
 
-    public Filtro(Id idCsvOrigem, Id idCsvDestino, Expressao condicao) {
-        this.idCsvOrigem = idCsvOrigem;
+    public Filtro(Id idVariavelCsv, Id idCsvDestino, Expressao condicao) {
+        // Chama o construtor da classe mãe para inicializar o idCsvOrigem
+        super(idVariavelCsv); 
         this.idCsvDestino = idCsvDestino;
         this.condicao = condicao;
     }
@@ -36,14 +36,10 @@ public class Filtro implements Comando {
         IdentificadorNaoDeclaradoException, EntradaVaziaException, ErroTipoEntradaException {
         AmbienteExecucaoImperativa2 ambiente = (AmbienteExecucaoImperativa2) amb;
 
-        // 1. Obter os dados do CSV de origem.
-        Valor valorCsv = ambiente.get(idCsvOrigem);
-        if (!(valorCsv instanceof ValorString)) {
-            throw new RuntimeException("Erro: A variável '" + idCsvOrigem + "' não é um CSV.");
-        }
-        String[] linhas = ((ValorString) valorCsv).valor().split("\n");
+        String[] linhas = getLinhasDoCsv(ambiente);
+
         if (linhas.length < 2) {
-            System.out.println("Aviso: CSV de origem '" + idCsvOrigem + "' está vazio ou não tem dados.");
+            System.out.println("Aviso: CSV de origem '" + idVariavelCsv + "' está vazio ou não tem dados.");
             return ambiente;
         }
 
@@ -92,7 +88,7 @@ public class Filtro implements Comando {
         ambiente.map(idCsvDestino, new ValorString(novoConteudoCsv));
         
         System.out.println("\n--- Filtro Aplicado ---");
-        System.out.println("Dados de '" + idCsvOrigem + "' filtrados para '" + idCsvDestino + "'.");
+        System.out.println("Dados de '" + idVariavelCsv + "' filtrados para '" + idCsvDestino + "'.");
         System.out.println((linhasFiltradas.size() - 1) + " registros correspondem à condição.");
         System.out.println("-----------------------\n");
 
@@ -103,7 +99,6 @@ public class Filtro implements Comando {
     public boolean checaTipo(AmbienteCompilacaoImperativa amb)
         throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException,
         EntradaVaziaException {
-        // Uma checagem de tipo ideal verificaria se a expressão de condição resulta em um booleano.
         return true;
     }
 }

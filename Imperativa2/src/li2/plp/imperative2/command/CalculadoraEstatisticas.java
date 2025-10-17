@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// Classe final pois só contém métodos estáticos (não precisa ser instanciada)
 public final class CalculadoraEstatisticas {
 
     // Medidas de Tendência Central
