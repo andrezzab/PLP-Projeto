@@ -16,7 +16,6 @@ import li2.plp.imperative1.memory.AmbienteCompilacaoImperativa;
 import li2.plp.imperative1.memory.AmbienteExecucaoImperativa;
 import li2.plp.imperative1.memory.EntradaVaziaException;
 import li2.plp.imperative1.memory.ErroTipoEntradaException;
-// Importe a interface que você quer usar
 import li2.plp.imperative2.memory.AmbienteExecucaoImperativa2;
 
 public class Load implements Comando {
@@ -25,7 +24,6 @@ public class Load implements Comando {
     private String nomeVariavel;
     private ChamadaProcedimento procedimentoParaExecutar;
 
-    // Construtores (não precisam de alteração)
     public Load(String local, String nomeVariavel, ChamadaProcedimento procedimento) {
         this.local = local;
         this.nomeVariavel = nomeVariavel;
@@ -57,7 +55,7 @@ public class Load implements Comando {
                 if (nomeVariavel != null) {
                     Id id = new Id(nomeVariavel);
                     try {
-                        // Você pode usar métodos do ambiente base (changeValor)
+                        // pode usar métodos do ambiente base (changeValor)
                         ambiente.changeValor(id, valor);
                     } catch (VariavelNaoDeclaradaException e) {
                         ambiente.map(id, valor);
