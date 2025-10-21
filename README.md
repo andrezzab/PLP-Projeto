@@ -163,9 +163,15 @@ ComandoEstatistico ::= ComandoLoad
        | ComandoFiltro
        | ComandoCalculo
 
-ComandoLoad ::= "LOAD" "(" Expressao ")"
+ComandoLoad ::= "LOAD" StringLiteral ["AS" Id]
 
-ComandoFiltro ::= "FILTER" "(" Expressao ")"
+ComandoFiltro ::= "FILTER" Id ON StringLiteral
 
-ComandoCalculo ::= ("MAX" | "MEAN" | "MEDIAN" | "MIN" | "MODE" | "STD" | "VARIANCE" | "COUNT") "(" Expressao ")"
-// --- FIM DA NOVA SEÇÃO ---
+ComandoCalculo ::= ("MAX" | "MEAN" | "MEDIAN" | "MIN" | "MODE" | "STD" | "VARIANCE" | "COUNT") Id ON StringLiteral
+
+// Definições auxiliares
+
+StringLiteral ::= "\"" [^\"]* "\"" 
+                | "'" [^']* "'"
+
+Id ::= [a-zA-Z_][a-zA-Z0-9_]*
