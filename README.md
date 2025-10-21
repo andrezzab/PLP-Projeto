@@ -158,6 +158,7 @@ ChamadaProcedimento ::= “call” Id “(“ [ ListaExpressao ] “)”
 ListaExpressao ::= Expressao | Expressao, ListaExpressao
 
 // --- SEÇÃO NOVA ---
+
 ComandoEstatistico ::= ComandoLoad
        | ComandoFiltro
        | ComandoCalculo
