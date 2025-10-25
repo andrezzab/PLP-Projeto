@@ -153,6 +153,12 @@ TOKEN : /* TOKENS DE IMPERATIVA 2 */
 | < VARIANCE: "VARIANCE" >
 | < MIN: "MIN" >
 | < MAX: "MAX" >
+| < RANGE: "RANGE" >
+| < QUARTILES: "QUARTILES" >
+| < SHOW: "SHOW" >
+| < STATS: "STATS" >
+| < LIMIT: "LIMIT" >
+| < SAVE: "SAVE" >
 | < ON : "ON" >
 | < COUNT: "COUNT" >
 | < FILTER: "FILTER" >
@@ -506,6 +512,26 @@ Max PMax():
     { return new Max(vc.var, vc.col, new Id(idDestino.toString())); }
 }
 
+Range PRange():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <RANGE> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Range(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
+Quartiles PQuartiles():
+{
+    VarColuna vc;
+    Token idDestino;
+}
+{
+    <QUARTILES> vc=PVarColuna() <AS> idDestino=<IDENTIFIER>
+    { return new Quartiles(vc.var, vc.col, new Id(idDestino.toString())); }
+}
+
 Contagem PContagem():
 {
     Token idVar;
@@ -526,6 +552,33 @@ Filtro PFiltro():
     <FILTER> idOrigem=<IDENTIFIER> <INTO> idDestino=<IDENTIFIER> <WHERE> cond=PExpressao()
     {
         return new Filtro(new Id(idOrigem.toString()), new Id(idDestino.toString()), cond);
+    }
+}
+
+Show PShow():
+{
+    Token idVar, coluna;
+    Token limite = null;
+}
+{
+    (
+        LOOKAHEAD(<SHOW> <STATS>)
+        <SHOW> <STATS> idVar=<IDENTIFIER> "." coluna=<IDENTIFIER>
+        { return new Show(new Id(idVar.toString()), new Id(coluna.toString())); }
+      | <SHOW> idVar=<IDENTIFIER> <LIMIT> limite=<INTEGER_LITERAL>
+        { return new Show(new Id(idVar.toString()), Integer.parseInt(limite.toString())); }
+    )
+}
+
+Save PSave():
+{
+    Token idVar, path;
+}
+{
+    <SAVE> idVar=<IDENTIFIER> <AS> path=<STRING_LITERAL>
+    {
+        String caminho = path.image.substring(1, path.image.length() - 1);
+        return new Save(new Id(idVar.toString()), caminho);
     }
 }
 
@@ -802,6 +855,10 @@ Comando PComandoSimples() :
 	  | retorno = PVariance()
 	  | retorno = PMin()
 	  | retorno = PMax()
+	  | retorno = PRange()
+	  | retorno = PQuartiles()
+	  | retorno = PShow()
+	  | retorno = PSave()
       | retorno = PSkip()
       | retorno = PAtribuicao()
       | retorno = PComandoDeclaracao()

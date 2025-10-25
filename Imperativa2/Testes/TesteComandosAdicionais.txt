@@ -1,0 +1,10 @@
+LOAD "Testes/csvs/teste_drop.csv" AS dados;
+RANGE dados.idade AS amplitude_idade;
+RANGE dados.salario AS amplitude_salario;
+QUARTILES dados.idade AS quartis_idade;
+QUARTILES dados.salario AS quartis_salario;
+SHOW dados LIMIT 5;
+SHOW STATS dados.idade;
+SHOW STATS dados.salario;
+FILTER dados INTO dados_filtrados WHERE idade > 30;
+SAVE dados_filtrados AS "Testes/csvs/resultado_filtrado.csv"

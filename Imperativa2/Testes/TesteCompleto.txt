@@ -1,0 +1,24 @@
+LOAD "Testes/csvs/funcionarios_completo.csv" AS func;
+MEAN func.idade AS media_idade;
+MEAN func.salario AS media_salario;
+MEAN func.anos_experiencia AS media_experiencia;
+MEDIAN func.idade AS mediana_idade;
+MEDIAN func.salario AS mediana_salario;
+MODE func.departamento AS departamento_comum;
+STD func.salario AS desvio_salario;
+VARIANCE func.salario AS variancia_salario;
+MIN func.idade AS idade_minima;
+MAX func.idade AS idade_maxima;
+MIN func.salario AS salario_minimo;
+MAX func.salario AS salario_maximo;
+RANGE func.idade AS amplitude_idade;
+RANGE func.salario AS amplitude_salario;
+QUARTILES func.salario AS quartis_salario;
+QUARTILES func.anos_experiencia AS quartis_experiencia;
+COUNT func;
+FILTER func INTO func_ti WHERE departamento == "TI";
+COUNT func_ti;
+MEAN func_ti.salario AS media_salario_ti;
+SHOW func LIMIT 10;
+SHOW STATS func.salario;
+SAVE func_ti AS "Testes/csvs/funcionarios_ti.csv"
