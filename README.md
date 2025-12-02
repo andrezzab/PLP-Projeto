@@ -128,6 +128,7 @@ ValorConcreto ::= ValorInteiro
                 | ValorBooleano
                 | ValorString
                 | ValorDouble           // ---> ADICIONADO
+                | ValorDataFrame           // ---> ADICIONADO
 
 ExpUnaria ::= "-" Expressao
             | "not" Expressao
@@ -155,7 +156,7 @@ DeclaracaoProcedimento ::= "proc" Id "(" [ ListaDeclaracaoParametro ] ")" "{" Co
 ListaDeclaracaoParametro ::= Tipo Id
                            | Tipo Id "," ListaDeclaracaoParametro
 
-Tipo ::= "string" | "int" | "boolean" | "double" // ---> ADICIONADO double
+Tipo ::= "string" | "int" | "boolean" | "double" | TipoDataFrame // ---> ADICIONADO double
 
 While ::= "while" Expressao "do" Comando
 
